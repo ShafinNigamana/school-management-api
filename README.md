@@ -6,6 +6,18 @@ A Node.js + Express + MySQL backend for managing school records and finding near
 
 The School Management API lets clients add school records with geographic coordinates and retrieve schools sorted by distance from a user-supplied location. It is useful for location-aware systems such as school discovery apps, student onboarding tools, admissions portals, and administrative dashboards.
 
+## Live API
+
+Base URL:
+
+https://school-management-api-ogp4.onrender.com
+
+### Endpoints
+
+- POST /api/addSchool
+- GET /api/listSchools
+- GET /health
+
 ## Tech Stack
 
 - Node.js
@@ -20,6 +32,14 @@ The School Management API lets clients add school records with geographic coordi
 - Input validation and centralized error handling
 - Optional `limit` query parameter for result control
 - Health check endpoint for quick service verification
+
+## Key Highlights
+
+- Clean layered architecture (Controller → Service → Model)
+- Input validation and error handling
+- Distance-based sorting using Haversine formula
+- Scalable and production-ready structure
+- Cloud deployment with remote MySQL database
 
 ## API Documentation
 
@@ -134,54 +154,49 @@ Simple health check endpoint.
 ## System Architecture
 
 ```text
-      ┌──────────────┐
-      │   Client     │
-      └──────┬───────┘
-        │ HTTP Request
-        ▼
-      ┌──────────────┐
-      │    Routes    │
-      └──────┬───────┘
-        ▼
-      ┌──────────────┐
-      │ Controllers  │
-      └──────┬───────┘
-        ▼
-      ┌──────────────┐
-      │   Services   │
-      │ (Validation, │
-      │  Logic)      │
-      └──────┬───────┘
-        ▼
-      ┌──────────────┐
-      │   Models     │
-      │ (DB Queries) │
-      └──────┬───────┘
-        ▼
-      ┌──────────────┐
-      │   MySQL DB   │
-      └──────────────┘
+Client (Postman / Frontend)
+        |
+        v
+   Express Server
+        |
+        v
+      Routes
+        |
+        v
+   Controllers
+        |
+        v
+     Services
+ (Validation + Logic)
+        |
+        v
+      Models
+ (Database Queries)
+        |
+        v
+   MySQL Database
 ```
 
-- Client: Sends HTTP requests to the API.
-- Routes: Map endpoints to controller handlers.
-- Controllers: Read request data and return HTTP responses.
-- Services: Handle validation, business logic, and distance-based sorting.
-- Models: Execute database queries.
-- Database: Stores school records in MySQL.
+### Architecture Layers
+
+- **Routes** → Define API endpoints
+- **Controllers** → Handle request & response
+- **Services** → Business logic + validation + distance calculation
+- **Models** → Database interaction
+- **Database** → Stores school data
 
 ## Request Flow
 
 ### Add School Flow
 
 ```text
-Client -> Route -> Controller -> Service (Validation) -> Model -> Database -> Response
+Client → Route → Controller → Service (Validation) → Model → Database → Response
 ```
 
 ### List Schools Flow
 
 ```text
-Client -> Route -> Controller -> Service
+Client → Route → Controller → Service
 → Fetch Schools from DB
 → Calculate Distance (Haversine)
 → Sort by Distance
@@ -189,9 +204,9 @@ Client -> Route -> Controller -> Service
 → Response
 ```
 
-## Engineering Decisions
+## Design Decisions
 
-- Used layered architecture (`Controller -> Service -> Model`) for separation of concerns.
+- Used layered architecture (`Controller → Service → Model`) for separation of concerns.
 - Implemented centralized error handling middleware for cleaner controllers.
 - Used parameterized queries to reduce SQL injection risk.
 - Chose the Haversine formula for accurate geographic distance calculation.
@@ -229,6 +244,8 @@ npm install
 ### 3. Create the MySQL database
 
 Create a database and a `schools` table.
+
+Note: In production, a cloud-hosted MySQL database is used (Railway).
 
 ```sql
 CREATE DATABASE school_management;
@@ -276,7 +293,19 @@ Optional:
 
 ## Testing
 
-Use Postman to verify the API endpoints.
+A Postman collection is included in this repository:
+
+postman_collection.json
+
+The Postman collection file can be imported directly into Postman for testing.
+
+It contains:
+
+- Valid API requests
+- Invalid test cases
+- Edge case validation
+
+This allows quick verification of all endpoints.
 
 Example requests:
 
