@@ -316,5 +316,5 @@ As required by the assignment, the submission should include:
 
 ## Author
 
-- Name: Your Name
-- Contact: your.email@example.com
+- Name: Shafin Nigamana
+- Contact: shafin.nigamana@gmail.com
