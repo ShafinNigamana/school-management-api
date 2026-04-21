@@ -160,6 +160,11 @@ Client (Postman / Frontend)
    Express Server
         |
         v
+  Middleware Layer
+(CORS, JSON Parser,
+ Error Handler)
+        |
+        v
       Routes
         |
         v
@@ -179,6 +184,7 @@ Client (Postman / Frontend)
 
 ### Architecture Layers
 
+- **Middleware** → Handles request parsing, CORS, and centralized error handling
 - **Routes** → Define API endpoints
 - **Controllers** → Handle request & response
 - **Services** → Business logic + validation + distance calculation
