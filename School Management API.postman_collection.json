@@ -1,0 +1,309 @@
+{
+  "info": {
+    "_postman_id": "dcb4ea82-9742-4abf-9c6f-e5727efd506b",
+    "name": "School Management API",
+    "description": "This collection contains APIs for managing schools and retrieving them based on proximity.\n\nIncludes:\n\n- Add School (valid + invalid cases)\n    \n- List Schools (with sorting + limit)\n    \n- Error handling test cases",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "51802314",
+    "_collection_link": "https://go.postman.co/collection/51802314-dcb4ea82-9742-4abf-9c6f-e5727efd506b?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Add School API",
+      "item": [
+        {
+          "name": "Add School - Valid",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Test School 1\",\r\n  \"address\": \"Delhi\",\r\n  \"latitude\": 28.6139,\r\n  \"longitude\": 77.2090\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://school-management-api-ogp4.onrender.com/api/addSchool",
+              "protocol": "https",
+              "host": [
+                "school-management-api-ogp4",
+                "onrender",
+                "com"
+              ],
+              "path": [
+                "api",
+                "addSchool"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Add School - Missing Fields",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Test School\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://school-management-api-ogp4.onrender.com/api/addSchool",
+              "protocol": "https",
+              "host": [
+                "school-management-api-ogp4",
+                "onrender",
+                "com"
+              ],
+              "path": [
+                "api",
+                "addSchool"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Add School - Invalid Latitude",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Invalid School\",\r\n  \"address\": \"Delhi\",\r\n  \"latitude\": 200,\r\n  \"longitude\": 77\r\n}"
+            },
+            "url": {
+              "raw": "https://school-management-api-ogp4.onrender.com/api/addSchool",
+              "protocol": "https",
+              "host": [
+                "school-management-api-ogp4",
+                "onrender",
+                "com"
+              ],
+              "path": [
+                "api",
+                "addSchool"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Add School - Empty Name",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"   \",\r\n  \"address\": \"Delhi\",\r\n  \"latitude\": 28.6,\r\n  \"longitude\": 77.2\r\n}"
+            },
+            "url": {
+              "raw": "https://school-management-api-ogp4.onrender.com/api/addSchool",
+              "protocol": "https",
+              "host": [
+                "school-management-api-ogp4",
+                "onrender",
+                "com"
+              ],
+              "path": [
+                "api",
+                "addSchool"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "List Schools API",
+      "item": [
+        {
+          "name": "List Schools - Valid",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://school-management-api-ogp4.onrender.com/api/listSchools?latitude=28.61&longitude=77.20",
+              "protocol": "https",
+              "host": [
+                "school-management-api-ogp4",
+                "onrender",
+                "com"
+              ],
+              "path": [
+                "api",
+                "listSchools"
+              ],
+              "query": [
+                {
+                  "key": "latitude",
+                  "value": "28.61"
+                },
+                {
+                  "key": "longitude",
+                  "value": "77.20"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "List Schools - Limit 2",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://school-management-api-ogp4.onrender.com/api/listSchools?latitude=28.61&longitude=77.20&limit=2",
+              "protocol": "https",
+              "host": [
+                "school-management-api-ogp4",
+                "onrender",
+                "com"
+              ],
+              "path": [
+                "api",
+                "listSchools"
+              ],
+              "query": [
+                {
+                  "key": "latitude",
+                  "value": "28.61"
+                },
+                {
+                  "key": "longitude",
+                  "value": "77.20"
+                },
+                {
+                  "key": "limit",
+                  "value": "2"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "List Schools - Invalid Limit",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://school-management-api-ogp4.onrender.com/api/listSchools?latitude=28.61&longitude=77.20&limit=0",
+              "protocol": "https",
+              "host": [
+                "school-management-api-ogp4",
+                "onrender",
+                "com"
+              ],
+              "path": [
+                "api",
+                "listSchools"
+              ],
+              "query": [
+                {
+                  "key": "latitude",
+                  "value": "28.61"
+                },
+                {
+                  "key": "longitude",
+                  "value": "77.20"
+                },
+                {
+                  "key": "limit",
+                  "value": "0"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "List Schools - Missing Params",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://school-management-api-ogp4.onrender.com/api/listSchools",
+              "protocol": "https",
+              "host": [
+                "school-management-api-ogp4",
+                "onrender",
+                "com"
+              ],
+              "path": [
+                "api",
+                "listSchools"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "List Schools - Invalid Coordinates",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://school-management-api-ogp4.onrender.com/api/listSchools?latitude=999&longitude=abc",
+              "protocol": "https",
+              "host": [
+                "school-management-api-ogp4",
+                "onrender",
+                "com"
+              ],
+              "path": [
+                "api",
+                "listSchools"
+              ],
+              "query": [
+                {
+                  "key": "latitude",
+                  "value": "999"
+                },
+                {
+                  "key": "longitude",
+                  "value": "abc"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
